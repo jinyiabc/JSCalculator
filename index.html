@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="jsCalculator">
+  <head>
+    <base href="/" >
+    <title>Javascript Calculator</title>
+    <link href="content/css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="app/lib/angular.min.js"></script>
+    <script src="app/app.js"></script>
+  </head>
+  <!--<ng-include src="'header.html'"></ng-include>-->
+  <body>
+
+    <div class="content" ng-controller="calController">
+
+      <h1>Javascript Calculator</h1>
+      <input type="text" ng-model="key">
+
+
+    <button ng-click="addNum(0)">0</button>
+    <button ng-click="addNum('.')">.</button>
+    <button ng-click="addNum(1)">1</button>
+    <button ng-click="addNum(2)">2</button>
+    <button ng-click="addNum(3)">3</button>
+    <button ng-click="addNum(4)">4</button>
+    <button ng-click="addNum(5)">5</button>
+    <button ng-click="addNum(6)">6</button>
+    <button ng-click="addNum(7)">7</button>
+    <button ng-click="addNum(8)">8</button>
+    <button ng-click="addNum(9)">9</button>
+
+    <pre>The first number is: {{array}}</pre>
+    <pre>The second number is: {{symbol}}</pre>
+    <pre>The total is: {{total}}</pre>
+
+    <button ng-click="add()">+</button>
+    <button ng-click="subtract()">-</button>
+    <button ng-click="multiply()">*</button>
+    <button ng-click="divide()">/</button>
+    <button ng-click="equal()">=</button>
+
+  <button ng-click="allClear()">AC</button>
+  <button ng-click="clearEntry()">CE</button>
+
+
+  <ul ng-repeat=" element in array1">
+    <li>{{element}}{{symbol1[$index]}}</li>
+  </ul>
+
+    </div>
+
+
+  </body>
+</html>
