@@ -2,8 +2,67 @@
 <html lang="en" ng-app="jsCalculator">
   <head>
     <base href="/" >
-    <title>Javascript Calculator</title>
-    <link href="content/css/styles.css" rel="stylesheet" type="text/css" />
+    <title>JS Calculator</title>
+    <style media="screen">
+    #buttons {
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      position: absolute;
+      display: inline-block;
+      width: 280px;
+      height: auto;
+      margin-top: 15px;
+      margin-left: 15px;
+    }
+    #entrybox {
+      width: 85%;
+      height: 65px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 2px solid #b4b39d;
+      border-radius: 6px;
+      background-color: #c3c2ab;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #818181;
+    }
+    button {
+      border-radius: 8px;
+      border: none;
+      background-color: #3a3a3a;
+      margin: 0 4px 10px 8px;
+      height: 40px;
+      width: 50px;
+      box-shadow: 0px 3px 0px 0px #222121, inset -1px -3px 10px 1px #515151;
+      color:white;
+    }
+    #entry {
+      margin-right: 10px;
+      font-size: 35px;
+    }
+    #calculator {
+      height: 410px;
+      width: 300px;
+      margin-top: 10%;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #dfd8d0;
+      border: 2px solid #908b85;
+      border-radius: 20px;
+      box-shadow: 7px 10px 34px 1px rgba(0, 0, 0, 0.68), inset -1px -6px 12px 0.1px #89847e;
+    }
+    #footer {
+      font-family: 'Josefin Sans', sans-serif;
+      position: relative;
+      font-size: 16px;
+      font-weight: normal;
+      margin-top: 40px;
+      width: 100%;
+      height: 40px;
+    }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
     <!-- <script src="app/app.js"></script> -->
   </head>
@@ -11,14 +70,18 @@
   <body>
 
     <div class="content" ng-controller="calController">
+<div id='calculator'>
 
-      <h1>Javascript Calculator</h1>
+      <h1 style="text-align: center;">JS Calculator</h1>
       <!-- <input type="text" ng-model="key"> -->
+      <div id="entrybox" style='text-align:right;'>
+      <div id='entry'>
       <div class="">{{key}}</div>
+      </div>
+      </div>
 
-
+<div id="buttons">
     <button ng-click="addNum(0)">0</button>
-    <button ng-click="addNum('.')">.</button>
     <button ng-click="addNum(1)">1</button>
     <button ng-click="addNum(2)">2</button>
     <button ng-click="addNum(3)">3</button>
@@ -28,10 +91,11 @@
     <button ng-click="addNum(7)">7</button>
     <button ng-click="addNum(8)">8</button>
     <button ng-click="addNum(9)">9</button>
+    <button ng-click="addNum('.')">.</button>
 
-    <pre>The first number is: {{array}}</pre>
+    <!-- <pre>The first number is: {{array}}</pre>
     <pre>The second number is: {{symbol}}</pre>
-    <pre>The total is: {{total}}</pre>
+    <pre>The total is: {{total}}</pre> -->
 
     <button ng-click="add()">+</button>
     <button ng-click="subtract()">-</button>
@@ -41,13 +105,27 @@
 
   <button ng-click="allClear()">AC</button>
   <button ng-click="clearEntry()">CE</button>
+</div>
 
-
-  <ul ng-repeat=" element in array1">
+  <!-- <ul ng-repeat=" element in array1">
     <li>{{element}}{{symbol1[$index]}}</li>
-  </ul>
+  </ul> -->
+</div>
 
-    </div>
+<footer id="footer" class="text-center">
+  <div class="container">
+    Coded by
+    <a href="https://github.com/jinyiabc/JSCalculator" target="_blank">
+        Alex J.Y.</a>
+  </div>
+  <div class="container">
+    Calculator style from
+    <a href="https://www.linkedin.com/in/justin-woodward-891772118" target="_blank">
+        Justin Woodward</a>
+  </div>
+</footer>
+
+</div>
 
 
   </body>
@@ -61,7 +139,7 @@
    $scope.array = [];
    $scope.symbol = [];
    $scope.total = 0;
-   $scope.key = 5;
+   $scope.key = '0';
     $scope.addNum = function(num){
       if ($scope.total == 0){
       $scope.number += num;
@@ -89,6 +167,8 @@
       $scope.array.push($scope.number);
       $scope.symbol.push('-');
       $scope.number = '';
+      $scope.key = '-';
+
       }
       if ($scope.total != 0 && $scope.total != NaN){
         $scope.array.push($scope.total.toString());
@@ -102,6 +182,8 @@
       $scope.array.push($scope.number);
       $scope.symbol.push('*');
       $scope.number = '';
+      $scope.key = '*';
+
       }
       if ($scope.total != 0 && $scope.total != NaN){
         $scope.array.push($scope.total.toString());
@@ -116,6 +198,8 @@
       $scope.array.push($scope.number);
       $scope.symbol.push('/');
       $scope.number = '';
+      $scope.key = '/';
+
       }
       if ($scope.total != 0 && $scope.total != NaN){
         $scope.array.push($scope.total.toString());
@@ -130,7 +214,7 @@
       $scope.symbol = [];
       $scope.number = '';
       $scope.total = 0;
-      $scope.key = '';
+      $scope.key = '0';
     };
 
     $scope.clearEntry = function(){
@@ -142,13 +226,14 @@
         //do nothing
       } else {
         $scope.symbol.pop();   // remove last element of array.
-        $scope.key = '';
+        $scope.key = '0';
       };
 
     };
 
     $scope.equal = function() {
       if($scope.total != 0) {
+          $scope.key = $scope.total;
         return $scope.total;
       }
       if ($scope.number == ''){
@@ -186,6 +271,8 @@
       $scope.symbol = [];
       $scope.array = [];
       $scope.number = '';
+
+      $scope.key = $scope.total;
       return $scope.total;
 
     };
